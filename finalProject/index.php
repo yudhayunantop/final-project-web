@@ -1,11 +1,6 @@
 <?php
 require'functions.php';
 $iklan = query("SELECT * FROM iklan;");
-
-// tombol cari ditekan
-    if ( isset($_POST["cari"]) ) {
-        $iklan = cari($_POST["keyword"]);
-	}
 ?>
 <!DOCTYPE html>
 <html>
@@ -30,21 +25,23 @@ $iklan = query("SELECT * FROM iklan;");
 		</nav>
 	</header>
 	<main>
+	
 		<div id="content">
 			<form action="" method="post">
-				<input class="cari" type="text" name="keyword" size="40" autofocus placeholder="Masukkan keyword pencarian..." autocomplete="off">
-				<button class="button" type="submit" name="cari">Cari!</button>
+				<input class="cari" type="text" name="keyword" size="40" autofocus placeholder="Masukkan keyword pencarian..." autocomplete="off" id="keyword">
 			</form>
-		<?php foreach ($iklan as $row):?>
-		<article class="card" id="iklan">
-			<h3><?php echo $row["nama"];?></h3>
-				<img src="img/<?php echo $row["gambar"];?>" width="500">
-				<h4><?php echo $row["noTelp"];?></h4>
-				<p><?php echo $row["email"];?></p>
-				<p><?php echo $row["alamat"];?></p>
-				<p><?php echo $row["deskripsi"];?></p>
-		</article>
-		<?php endforeach;?>
+		<div id="container">		
+			<?php foreach ($iklan as $row):?>
+			<article class="card" id="iklan">
+				<h3><?php echo $row["nama"];?></h3>
+					<img src="img/<?php echo $row["gambar"];?>" width="500">
+					<h4><?php echo $row["noTelp"];?></h4>
+					<p><?php echo $row["email"];?></p>
+					<p><?php echo $row["alamat"];?></p>
+					<p><?php echo $row["deskripsi"];?></p>
+			</article>
+			<?php endforeach;?>
+		</div>
 		</div>
 		<aside>
 			<article class="profile card">
@@ -72,6 +69,8 @@ $iklan = query("SELECT * FROM iklan;");
 	<footer>
 		<p class="fontputih">Copyright &copy;yudhayp2020</p>
 	</footer>
+
+	<script src="js/script.js"></script>
 </body>
 
 </html>
