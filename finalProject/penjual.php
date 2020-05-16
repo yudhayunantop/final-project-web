@@ -6,8 +6,13 @@ if (!isset($_SESSION["login"])) {
 }
 
 require'functions.php';
+
 $username=$_SESSION["username"];
-$iklan = query("SELECT * FROM iklan WHERE username='$username';");
+    if ($username == 'admin') {
+        $iklan = query("SELECT * FROM iklan;");
+    }else {
+        $iklan = query("SELECT * FROM iklan WHERE username='$username';");    
+    }
 
 // tombol cari ditekan
     if ( isset($_POST["cari"]) ) {
@@ -49,6 +54,9 @@ $iklan = query("SELECT * FROM iklan WHERE username='$username';");
             <th>Nama</th>
             <th>Email</th>
             <th>Alamat</th>
+            <?php if ($username == 'admin') : ?>
+            <th>Username</th>
+            <?php endif; ?>
         </tr>
         
         <?php $i = 1;?>
@@ -64,6 +72,9 @@ $iklan = query("SELECT * FROM iklan WHERE username='$username';");
             <td><?php echo $row["nama"];?></td>
             <td><?php echo $row["email"];?></td>
             <td><?php echo $row["alamat"];?></td>
+            <?php if ($username == 'admin') : ?>
+            <td><?php echo $row["username"]; ?></td>
+            <?php endif; ?>
         </tr>
         <?php $i++;?>
     <?php endforeach;?>
