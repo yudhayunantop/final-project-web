@@ -9,7 +9,7 @@
         $result = mysqli_query($conn, $query);
         $rows = [];
 
-        // ambil data(fetch) mahasiswa dari objek result
+        // ambil data(fetch) iklan dari objek result
         while($row = mysqli_fetch_assoc($result)){
             $rows[] = $row;
         }
@@ -129,13 +129,27 @@
     }
 
     function cari($keyword){
-        $query = "SELECT * FROM iklan 
-                    WHERE
-                      nama LIKE '%$keyword%' OR
-                      noTelp LIKE '%$keyword%' OR
-                      alamat LIKE '%$keyword%'
+        $username=$_SESSION["username"];
+        
+        if ($username == 'admin') {
+            $query = "SELECT * FROM iklan 
+            WHERE
+            nama LIKE '%$keyword%' OR
+            noTelp LIKE '%$keyword%' OR
+            alamat LIKE '%$keyword%' OR
+            username LIKE '%$keyword%'
                 ";
-        return query($query);
+            return query($query);
+        }else {
+            $query = "SELECT * FROM iklan 
+            WHERE
+            nama LIKE '%$keyword%' OR
+            noTelp LIKE '%$keyword%' OR
+            alamat LIKE '%$keyword%'
+                ";
+            return query($query);   
+        }
+
     }
 
     function registrasi($data) {
