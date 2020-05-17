@@ -131,7 +131,9 @@
     function cari($keyword){
         $query = "SELECT * FROM iklan 
                     WHERE
-                    nama LIKE '%$keyword%'
+                      nama LIKE '%$keyword%' OR
+                      noTelp LIKE '%$keyword%' OR
+                      alamat LIKE '%$keyword%'
                 ";
         return query($query);
     }
