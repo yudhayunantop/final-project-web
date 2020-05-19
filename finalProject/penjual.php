@@ -7,11 +7,25 @@ if (!isset($_SESSION["login"])) {
 
 require'functions.php';
 
+//cek session yang login
 $username=$_SESSION["username"];
     if ($username == 'admin') {
-        $iklan = query("SELECT * FROM iklan;");
+        $iklan = query("SELECT
+                        id,
+                        noTelp,
+                        nama,
+                        SUBSTRING(`email`, 1, 10) AS email,
+                        alamat,
+                        gambar,
+                        username FROM iklan");
     }else {
-        $iklan = query("SELECT * FROM iklan WHERE username='$username';");    
+        $iklan = query("SELECT
+                        id,
+                        noTelp,
+                        nama,
+                        SUBSTRING(`email`, 1, 10) AS email,
+                        alamat,
+                        gambar FROM iklan WHERE username='$username'");    
     }
 
 // tombol cari ditekan
@@ -54,6 +68,8 @@ $username=$_SESSION["username"];
             <th>Nama</th>
             <th>Email</th>
             <th>Alamat</th>
+
+            <!-- Muncul kalau login admin saja -->
             <?php if ($username == 'admin') : ?>
             <th>Username</th>
             <?php endif; ?>
@@ -64,7 +80,7 @@ $username=$_SESSION["username"];
         <tr>
             <td><?php echo $i;?></td>
             <td>
-                <a class="ubah" href="ubah.php?id=<?php echo $row["id"];?>">Ubah</a> |
+                <a class="ubah" href="ubah.php?id=<?php echo $row["id"];?>">Ubah</a>
                 <a class="hapus" href="hapus.php?id=<?php echo $row["id"];?>" onclick="return confirm('yakin?')">Hapus</a>
             </td>
             <td><img src="img/<?php echo $row["gambar"];?>" width="50"></td>
@@ -72,6 +88,8 @@ $username=$_SESSION["username"];
             <td><?php echo $row["nama"];?></td>
             <td><?php echo $row["email"];?></td>
             <td><?php echo $row["alamat"];?></td>
+
+            <!-- Muncul kalau login admin saja -->
             <?php if ($username == 'admin') : ?>
             <td><?php echo $row["username"]; ?></td>
             <?php endif; ?>
