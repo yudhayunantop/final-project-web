@@ -33,12 +33,9 @@
         }
 
         //query insert data
-        $query = "INSERT INTO iklan
-                    VALUES
-                ('', '$noTelp', '$nama', '$email', '$alamat', '$gambar', '$deskripsi','$username')
-                ";
+        $query = "INSERT INTO iklan VALUES (null, '$noTelp', '$nama', '$email', '$alamat', '$gambar', '$deskripsi','$username')";
         mysqli_query($conn, $query);
-
+        
         return mysqli_affected_rows($conn);
     }
 
@@ -132,21 +129,35 @@
         $username=$_SESSION["username"];
         
         if ($username == 'admin') {
-            $query = "SELECT * FROM iklan 
-            WHERE
-            nama LIKE '%$keyword%' OR
-            noTelp LIKE '%$keyword%' OR
-            alamat LIKE '%$keyword%' OR
-            username LIKE '%$keyword%'
+        $query = "SELECT
+					id,
+					noTelp,
+					nama,
+					SUBSTRING(`email`, 1, 10) AS email,
+					alamat,
+					gambar,
+					username FROM iklan
+				WHERE
+					nama LIKE '%$keyword%' OR
+					noTelp LIKE '%$keyword%' OR
+					alamat LIKE '%$keyword%' OR
+					username LIKE '%$keyword%'
                 ";
             return query($query);
         }else {
-            $query = "SELECT * FROM iklan 
-            WHERE
-            nama LIKE '%$keyword%' OR
-            noTelp LIKE '%$keyword%' OR
-            alamat LIKE '%$keyword%'
-                ";
+        $query = "SELECT
+                       id,
+                       noTelp,
+                       nama,
+                       SUBSTRING(`email`, 1, 10) AS email,
+                       alamat,
+                       gambar FROM iklan 
+				 WHERE 
+						username='$username' AND
+						nama LIKE '%$keyword%' OR
+						noTelp LIKE '%$keyword%' OR
+						alamat LIKE '%$keyword%'    
+				 ";
             return query($query);   
         }
 
