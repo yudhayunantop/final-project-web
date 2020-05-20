@@ -125,8 +125,7 @@
         return mysqli_affected_rows($conn);
     }
 
-    function cari($keyword){
-        $username=$_SESSION["username"];
+    function cari($keyword, $username){
         
         if ($username == 'admin') {
         $query = "SELECT
@@ -146,18 +145,18 @@
             return query($query);
         }else {
         $query = "SELECT
-                       id,
-                       noTelp,
-                       nama,
-                       SUBSTRING(`email`, 1, 10) AS email,
-                       alamat,
-                       gambar FROM iklan 
-				 WHERE 
-						username='$username' AND
-						nama LIKE '%$keyword%' OR
-						noTelp LIKE '%$keyword%' OR
-						alamat LIKE '%$keyword%'    
-				 ";
+                    id,
+                    noTelp,
+                    nama,
+                    SUBSTRING(`email`, 1, 10) AS email,
+                    alamat,
+                    gambar FROM iklan 
+				WHERE 
+					username='$username' AND
+					nama LIKE '%$keyword%' OR
+					noTelp LIKE '%$keyword%' OR
+					alamat LIKE '%$keyword%'    
+				";
             return query($query);   
         }
 
