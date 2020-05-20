@@ -30,7 +30,10 @@ $username=$_SESSION["username"];
 
 // tombol cari ditekan
     if ( isset($_POST["cari"]) ) {
-        $iklan = cari($_POST["keyword"]);
+        if ($_POST["keyword"] == "") {
+            header("Location: penjual.php");
+        }
+        $iklan = cari($_POST["keyword"], $_SESSION["username"]);
     }
 ?>
 
