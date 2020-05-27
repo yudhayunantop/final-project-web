@@ -215,10 +215,45 @@ tr:hover {
   border: 3px solid #555;
 }
 
+img,
+h3 {
+  text-align: center;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 8px;
+}
+
+#content.aman {
+  float: left;
+  width: 30%;
+  box-shadow: 0 8px 8px 0 rgba(0, 0, 0, 0.2);
+  border-radius: 50px;
+  padding: 30px;
+  margin-top: 20px;
+  margin-left: 20px;
+  margin-right: 20px;
+  background-color: white;
+}
+
+#sugest {
+  float: left;
+  width: 100%;
+  margin-top: 50px;
+}
+
 @media (max-width: 1000px) {
+  img {
+    width: 200px;
+  }
 
   #content,
   aside {
+    width: 100%;
+    padding: 0;
+  }
+
+  #content.aman {
     width: 100%;
     padding: 0;
   }
