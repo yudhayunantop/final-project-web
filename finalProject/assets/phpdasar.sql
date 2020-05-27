@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 27 Bulan Mei 2020 pada 11.17
+-- Waktu pembuatan: 27 Bulan Mei 2020 pada 14.01
 -- Versi server: 10.4.11-MariaDB
 -- Versi PHP: 7.4.2
 
@@ -78,7 +78,8 @@ INSERT INTO `user` (`username`, `password`) VALUES
 -- Indeks untuk tabel `iklan`
 --
 ALTER TABLE `iklan`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `memiliki` (`username`);
 
 --
 -- Indeks untuk tabel `user`
@@ -95,6 +96,16 @@ ALTER TABLE `user`
 --
 ALTER TABLE `iklan`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+
+--
+-- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
+--
+
+--
+-- Ketidakleluasaan untuk tabel `iklan`
+--
+ALTER TABLE `iklan`
+  ADD CONSTRAINT `memiliki` FOREIGN KEY (`username`) REFERENCES `user` (`username`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
